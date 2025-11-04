@@ -12,13 +12,13 @@ const Footer = () => {
               Your destination for premium beauty and grooming services in Motihari.
             </p>
             <a 
-              href="https://instagram.com/zkmakeover"
+              href="https://instagram.com/zk_makeover"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
             >
               <Instagram size={20} />
-              <span>@zkmakeover</span>
+              <span>@zk_makeover</span>
             </a>
           </div>
 
@@ -32,6 +32,14 @@ const Footer = () => {
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                 >
                   Services
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                >
+                  Portfolio
                 </button>
               </li>
               <li>
