@@ -3,6 +3,7 @@ import { Sparkles, Heart, Star } from "lucide-react";
 import facialService from "@/assets/facial-service.jpg";
 import makeupService from "@/assets/makeup-service.jpg";
 import waxingService from "@/assets/waxing-service.jpg";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const services = [
   {
@@ -29,6 +30,8 @@ const services = [
 ];
 
 const Services = () => {
+  const { ref, isVisible } = useScrollReveal();
+  
   return (
     <section id="services" className="py-20 bg-gradient-to-b from-background via-blush to-background">
       <div className="container mx-auto px-4">
@@ -41,22 +44,25 @@ const Services = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <Card 
               key={index} 
-              className="group hover:shadow-elegant transition-all duration-500 border-border/50 overflow-hidden hover:-translate-y-2 bg-card"
+              className={`group hover:shadow-glow transition-all duration-700 border-border/50 overflow-hidden hover:-translate-y-3 bg-card ${
+                isVisible ? 'animate-fade-in opacity-100' : 'opacity-0'
+              }`}
+              style={{ animationDelay: `${index * 150}ms` }}
             >
               <div className="relative h-64 overflow-hidden">
                 <img 
                   src={service.image} 
                   alt={service.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-1 transition-all duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent opacity-60" />
-                <div className="absolute bottom-4 left-4 right-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+                <div className="absolute bottom-4 left-4 right-4 transform group-hover:translate-y-[-4px] transition-transform duration-500">
                   <div className="flex items-center gap-2 text-primary">
-                    <service.icon className="w-6 h-6" />
+                    <service.icon className="w-6 h-6 group-hover:scale-110 transition-transform duration-500" />
                     <h3 className="text-2xl font-bold text-foreground">{service.title}</h3>
                   </div>
                 </div>

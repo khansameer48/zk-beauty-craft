@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Star } from "lucide-react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import {
   Carousel,
   CarouselContent,
@@ -61,12 +62,14 @@ const testimonials = [
 
 const Portfolio = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { ref: galleryRef, isVisible: galleryVisible } = useScrollReveal();
+  const { ref: testimonialsRef, isVisible: testimonialsVisible } = useScrollReveal();
 
   return (
     <section id="portfolio" className="py-20 bg-gradient-to-b from-background to-blush">
       <div className="container mx-auto px-4">
         {/* Portfolio Gallery */}
-        <div className="text-center mb-16 animate-fade-in">
+        <div ref={galleryRef} className={`text-center mb-16 transition-all duration-700 ${galleryVisible ? 'animate-fade-in opacity-100' : 'opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
             Our Work
           </h2>
@@ -89,14 +92,14 @@ const Portfolio = () => {
                   <div className="p-2">
                     <Dialog>
                       <DialogTrigger asChild>
-                        <div className="relative overflow-hidden rounded-lg shadow-elegant group cursor-pointer">
+                        <div className="relative overflow-hidden rounded-lg shadow-elegant group cursor-pointer transform hover:-translate-y-2 transition-all duration-500">
                           <img
                             src={image.src}
                             alt={image.alt}
-                            className="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-700"
+                            className="w-full h-96 object-cover group-hover:scale-110 group-hover:brightness-110 transition-all duration-700"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <span className="text-white text-lg font-semibold">View Full Image</span>
+                          <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                            <span className="text-white text-lg font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">✨ View Full Image</span>
                           </div>
                         </div>
                       </DialogTrigger>
@@ -118,7 +121,7 @@ const Portfolio = () => {
         </div>
 
         {/* Testimonials Section */}
-        <div className="text-center mb-12 animate-fade-in">
+        <div ref={testimonialsRef} className={`text-center mb-12 transition-all duration-700 ${testimonialsVisible ? 'animate-fade-in opacity-100' : 'opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             What Our Clients Say
           </h2>
@@ -131,7 +134,10 @@ const Portfolio = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-card p-6 rounded-lg shadow-elegant hover:shadow-glow hover:-translate-y-2 transition-all duration-300 border border-border/50"
+              className={`bg-card p-6 rounded-lg shadow-soft hover:shadow-glow hover:-translate-y-3 transition-all duration-500 border border-border/50 hover:border-primary/30 ${
+                testimonialsVisible ? 'animate-fade-in opacity-100' : 'opacity-0'
+              }`}
+              style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="flex gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
