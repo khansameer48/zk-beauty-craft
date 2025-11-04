@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/zk-makeover-logo.jpg";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -41,9 +42,13 @@ const Navbar = () => {
           {/* Logo */}
           <button 
             onClick={() => scrollToSection('home')}
-            className="text-2xl md:text-3xl font-bold text-primary hover:text-primary/80 transition-colors"
+            className="hover:opacity-80 transition-opacity"
           >
-            ZK Makeover
+            <img 
+              src={logo} 
+              alt="ZK Makeover Logo" 
+              className="h-14 md:h-16 w-auto object-contain"
+            />
           </button>
 
           {/* Desktop Navigation */}

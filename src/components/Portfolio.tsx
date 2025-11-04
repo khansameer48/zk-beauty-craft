@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Star } from "lucide-react";
 import {
   Carousel,
@@ -6,6 +7,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import bridal1 from "@/assets/portfolio/bridal-1.jpg";
 import bridal2 from "@/assets/portfolio/bridal-2.jpg";
 import bridal3 from "@/assets/portfolio/bridal-3.jpg";
@@ -54,6 +60,8 @@ const testimonials = [
 ];
 
 const Portfolio = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   return (
     <section id="portfolio" className="py-20 bg-gradient-to-b from-background to-blush">
       <div className="container mx-auto px-4">
@@ -79,14 +87,27 @@ const Portfolio = () => {
               {portfolioImages.map((image, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                   <div className="p-2">
-                    <div className="relative overflow-hidden rounded-lg shadow-elegant group">
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        className="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <div className="relative overflow-hidden rounded-lg shadow-elegant group cursor-pointer">
+                          <img
+                            src={image.src}
+                            alt={image.alt}
+                            className="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-700"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span className="text-white text-lg font-semibold">View Full Image</span>
+                          </div>
+                        </div>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-5xl w-full p-0 border-0 bg-black/95">
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          className="w-full h-auto max-h-[90vh] object-contain"
+                        />
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </CarouselItem>
               ))}
