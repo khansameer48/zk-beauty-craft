@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Instagram } from "lucide-react";
+import { MapPin, Phone, Instagram, Mail } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -58,17 +58,36 @@ const Contact = () => {
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
                   <div className="p-3 rounded-full bg-primary/10">
+                    <Mail className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2 text-foreground">Email Us</h3>
+                    <a 
+                      href="mailto:zkmakeover@gmail.com" 
+                      className="text-primary hover:text-primary/80 transition-colors text-lg font-medium"
+                    >
+                      zkmakeover@gmail.com
+                    </a>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border/50 hover:shadow-elegant transition-shadow">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-full bg-primary/10">
                     <Instagram className="w-6 h-6 text-primary" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-2 text-foreground">Follow Us</h3>
                     <a 
-                      href="https://instagram.com/zkmakeover" 
+                      href="https://instagram.com/zk_makeover" 
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary hover:text-primary/80 transition-colors text-lg font-medium"
                     >
-                      @zkmakeover
+                      @zk_makeover
                     </a>
                   </div>
                 </div>
